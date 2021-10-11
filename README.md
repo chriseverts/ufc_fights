@@ -1,19 +1,19 @@
-# What is driving the errors in the Zestimates?
+# Drivers that effect the outcome of UFC fights
 
 ## Project Overview
 
-In this project, I will be working with a Zillow dataset to create a model that will discover what is driving error in zestimates 
+In this project, I will be working with a ufc data set to discover which attributes effect the outcome of a UFC fight.
 
 
 ## Project Description
 
-We are to use clustering and regression models to help us discover drivers for logerrors in the zestimates. Since there are heaps of missing data, we'll have to find ways to combat it. 
+I will be using classification machine learning algorithms to discover the best model at predicting statistical signficance in the outcome of UFC fights. The data set I will be working with is downloadable from the kaggle servers. Specifically the years 1993 - 2019
 
 ## Goals
 
 Deliver a Jupyter notebook going through the steps of the data science pipeline
-Create clusters in uncovering what the drivers of the error in the zestimate is.
-Discover features that contribute to logerror
+Create a classification model
+Discover features that contribute to wins/losses in the UFC
 Present a notebook about my findings
 
 ## Deliverables
@@ -21,7 +21,7 @@ Finalized Jupyter notebook complete with comments
 
 A README.md with executive summary, contents, data dictionary, conclusion and next steps, and how to recreate this project.
 
-Here is a provided link to my [trello board](https://trello.com/b/zSEZS5tf)
+Here is a provided link to my [trello board]
 
 ## Project Summary
 I incorporated clustering to discover keys drivers in logerror of zestimates using a Zillow data frame.
@@ -30,31 +30,29 @@ I incorporated clustering to discover keys drivers in logerror of zestimates usi
 
 | Column Name               | Description                              |
 |---------------------------|------------------------------------------|
-| acres                     | number of acres (lotsize/43560)          |
-| age                       | 2017-yearbuilt                           |
-| baths                     | number of bathrooms                      |
-| bathsandbeds              | number of bathrooms and bedrooms         |
-| beds                      | number of bedrooms                       |
-| county                    | which county property is in              |
-| fips                      | FIPS code of property                    |
-| land_dollar_per_sqft      | landtaxvaluedollarcnt/sqft               |
-| latitude                  | latitude coordinate                      |
-| longitude                 | longitude coordinate                     |
-| los_angeles               | if property is in Los Angeles =1, else 0 |
-| lot_dollar                | dollar value for property land           |
-| orange                    | if property is in Orange =1, else 0      |
-| rawcensustractandblock    | census bureau data                       |
-| regionidzip               | zip code (not accurate)                  |
-| sqft                      | square footage of property               |
-| structure_dollar_per_sqft | dollar per square foot                   |
-| tax_amount                | tax amount of property                   |
-| tax_rate                  | tax rate of property                     |
-| tax_value                 | tax value of property                    |
-| ventura                   | if county is in Ventura =1, else 0       |
-| yearbuilt                 | year property was built                  |
-| propertylandusetype       | property type                            |
-| parcelid                  | property ID                              |
-
+| R_ and B_                 | prefix signifies red and blue corner fighter stats respectively
+KD                          |is number of knockdowns
+SIG_STR is                  |no. of significant strikes 'landed of attempted'
+SIG_STR_pct is              |significant strikes percentage
+TOTAL_STR is                |total strikes 'landed of attempted'
+TD is                       |no. of takedowns
+TD_pct is                   |takedown percentages
+SUB_ATT is                  |no. of submission attempts
+PASS is                     |no. times the guard was passed?
+REV?
+HEAD is no. of significant strinks to the head 'landed of attempted'
+BODY is no. of significant strikes to the body 'landed of attempted'
+CLINCH is no. of significant strikes in the clinch 'landed of attempted'
+GROUND is no. of significant strikes on the ground 'landed of attempted'
+win_by is method of win
+last_round is last round of the fight (ex. if it was a KO in 1st, then this will be 1)
+last_round_time is when the fight ended in the last round
+Format is the format of the fight (3 rounds, 5 rounds etc.)
+Referee is the name of the Ref
+date is the date of the fight
+location is the location in which the event took place
+Fight_type is which weight class and whether it's a title bout or not
+Winner is the winner of the fight
 
 <br>
 
