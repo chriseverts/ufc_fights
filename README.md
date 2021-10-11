@@ -28,31 +28,30 @@ I incorporated clustering to discover keys drivers in logerror of zestimates usi
 
 ## Data Dictionary 
 
-| Column Name               | Description                              |
-|---------------------------|------------------------------------------|
+| Column Name               | Description                                                            |
+|---------------------------|------------------------------------------------------------------------|
 | R_ and B_                 | prefix signifies red and blue corner fighter stats respectively
 KD                          |is number of knockdowns
-SIG_STR is                  |no. of significant strikes 'landed of attempted'
-SIG_STR_pct is              |significant strikes percentage
-TOTAL_STR is                |total strikes 'landed of attempted'
-TD is                       |no. of takedowns
-TD_pct is                   |takedown percentages
-SUB_ATT is                  |no. of submission attempts
-PASS is                     |no. times the guard was passed?
-REV?
-HEAD is no. of significant strinks to the head 'landed of attempted'
-BODY is no. of significant strikes to the body 'landed of attempted'
-CLINCH is no. of significant strikes in the clinch 'landed of attempted'
-GROUND is no. of significant strikes on the ground 'landed of attempted'
-win_by is method of win
-last_round is last round of the fight (ex. if it was a KO in 1st, then this will be 1)
-last_round_time is when the fight ended in the last round
-Format is the format of the fight (3 rounds, 5 rounds etc.)
-Referee is the name of the Ref
-date is the date of the fight
-location is the location in which the event took place
-Fight_type is which weight class and whether it's a title bout or not
-Winner is the winner of the fight
+SIG_STR                     |no. of significant strikes 'landed of attempted'
+SIG_STR_pct                 |significant strikes percentage
+TOTAL_STR                   |total strikes 'landed of attempted'
+TD                          |no. of takedowns
+TD_pct                      |takedown percentages
+SUB_ATT                     |no. of submission attempts
+PASS                        |no. times the guard was passed?
+HEAD                        |no. of significant strinks to the head 'landed of attempted'
+BODY                        |no. of significant strikes to the body 'landed of attempted'
+CLINCH                      |no. of significant strikes in the clinch 'landed of attempted'
+GROUND                      |no. of significant strikes on the ground 'landed of attempted'
+win_by                      | method of win
+last_round                  | last round of the fight (ex. if it was a KO in 1st, then this will be 1)
+last_round_time             | when the fight ended in the last round
+Format                      | the format of the fight (3 rounds, 5 rounds etc.)
+Referee                     | the name of the Ref
+date                        | the date of the fight
+location                    | the location in which the event took place
+Fight_type                  | weight class and whether it's a title bout or not
+Winner                      |the winner of the fight
 
 <br>
 
@@ -83,40 +82,36 @@ Next steps would be:
 # The Pipeline
 
 ## Planning 
-Goal: Plan out the project I will be seeing how square footage, bedroom count, longitude, latitude, acreage, age, and county relate to log error of Zestimates. I will try to cluster by location and by land features to see if it'll be helpful to a supervised regression model.
+Goal: Plan out the project I will be seeing what features drive the outcome of a UFC fight.
 
-First, I will begin by bringing in my data and exploring features to assure that I want to continue with clustering these (and/or others), I can then turn it into a cluster column and use feature selection to see if the clustering helps.
-
-
-
-Hypotheses: Square footage, beds, acreage and location will have an effect on the logerror
+First, I will begin by bringing in my data and exploring features to assure that I want to continue with in the classification modeling
 
 
 ## Acquire 
-Goal: Have Zillow dataframe ready to prepare in first part of wrangle.py In this stage, I used a connection URL to access the CodeUp database. Using a SQL query, I brought in the 2017 Zillow dataset with only properties set for single use, and joined them with other tables via parcelid to get all of their features. I turned it into a pandas dataframe and created a .csv in order to use it for the rest of the pipeline.
+Goal: Have UFC dataframe ready to prepare in first part of wrangle.py In this stage, I used a csv file that was downloaded from the kaggle database. I turned it into a pandas dataframe and created a .csv in order to use it for the rest of the pipeline.
 
 ## Prep 
-Goal: Have Zillow dataset that is split into train, validate, test, and ready to be analyzed. Assure data types are appropriate and that missing values/duplicates/outliers are addressed. Put this in our wrangle.py file as well. In this stage, I handled missing values by dropping any rows and columns with more than 50% missing data.
+Goal: Have UFC dataset that is split into train, validate, test, and ready to be analyzed. Assure data types are appropriate and that missing values/duplicates/outliers are addressed. Put this in our wrangle.py file as well. In this stage, I handled missing values by dropping any rows and columns with more than 50% missing data.
 
-Duplicates were dropped (in parcelid)
+Duplicates were dropped 
 
-Nulls in square footage, lotsize, tax value, and tax amount were imputed with median. (after splitting)
+---Nulls in square footage, lotsize, tax value, and tax amount were imputed with median. (after splitting)
 
-Nulls in calculatedbathnbr, full bath count, region id city, regionidzip, and censustractandblock were imputed with most frequent. (after splitting)
+---Nulls in calculatedbathnbr, full bath count, region id city, regionidzip, and censustractandblock were imputed with most frequent. (after splitting)
 
 Any remaining nulls after these were dropped. I split the data into train, validate, test, X_train, y_train, X_validate, y_validate, X_test, and y_test. Last, I scaled it on a StandardScaler scaler (I made sure to drop outliers first!) and also returned X_train, X_validate, and X_test scaled.
 
 ## Explore 
-Goal: Visualize the data. Explore relationships, and make clusters. Use the visuals and statistics tests to help answer my questions. I plotted distributions, made sure nothing was out of the ordinary after cleaning the dataset.
+Goal: Visualize the data. Explore relationships. Use the visuals and statistics tests to help answer my questions. I plotted distributions, made sure nothing was out of the ordinary after cleaning the dataset.
 
-I ran a few t-tests with the features in respect to log error to test for difference in means. Also did a few correlation tests for continuous variables.
+I ran a few t-tests with the features in respect to winner to test for difference in means. Also did a few correlation tests for continuous variables.
 
-I found that square footage, bedroom count, and acres over 2 were all statistically significant. They are not independent to logerror. Square footage less then 1500 did not have an effect on logerror
+----I found that square footage, bedroom count, and acres over 2 were all statistically significant. They are not independent to logerror. Square footage less then 1500 did not have an effect on logerror
 
 ## Modeling and Evaluation
-Goal: develop a regression model that performs better than the baseline.
+----Goal: develop a regression model that performs better than the baseline.
 
-The models worked best with $/sqft, acres, cluster, and locations. Polynomial Regression performed the best, so I did a test on it.
+----The models worked best with $/sqft, acres, cluster, and locations. Polynomial Regression performed the best, so I did a test on it.
 
 | Model                            | RMSE Training | RMSE Validate | R^2   |
 |----------------------------------|---------------|---------------|-------|
@@ -142,7 +137,7 @@ A final notebook walkthrough of the my findings will be given
 # Conclusion 
 
 
-My clustering didn't help with my supervised model, however, I could not find the right combinations to make my model beat the baseline for predicting log error either.
+----My clustering didn't help with my supervised model, however, I could not find the right combinations to make my model beat the baseline for predicting log error either.
 
  - Log error was different for properties depending on county, number of bedrooms, dollar per square foot, and acres.
  - I made clusters with tax value and square footage, longitude and latitude, and based on property features like age, dollar per sqft, and acreage. I also made one based on location (neighborhoods) which consisted of longitude, latitude, and acreage bins.
@@ -151,6 +146,6 @@ My clustering didn't help with my supervised model, however, I could not find th
 
 # How to Recreate Project
 
- - You'll need your own username/pass/host credentials in order to use the get_connection function in my acquire.py to access the Zillow database
- - Have a copy of my acquire, prep, explore .py files. 
+ - You'll need to download the csv file from my repo
+ - Have a copy of my prep, explore .py files. 
  - My final notebook has all of the steps outlined, and it is really easy to adjust parameters.
