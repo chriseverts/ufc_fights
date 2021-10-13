@@ -57,17 +57,11 @@ Winner                      |the winner of the fight
 
 ##  Hypothesis 
 
-- Logerror is affected by squared feet over 1700 sq ft. 
+- More submission attempts and ctrl time will effect the outcome
+- The more rounds fought the more likely to win
+- Reach and hieght will effect the outcome of a win
+- Landing more sig shots will effect the outcome
 
-- Logerror is affected by the number of bedrooms
-
-- Logerror is affected by the number of acres
-
-- Logerror is affected by location
-
-- Logerror is affected by tax value per square feet
-
-- Logerror is effected by a combintaion of house features and also location + land
 
 ## Findings and Next Steps 
  - There appears to be distinct groups between longitude/latitude, and dollar per sqft/number of bedrooms, and acreage 
