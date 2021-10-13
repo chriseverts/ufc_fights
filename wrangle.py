@@ -12,6 +12,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 
+
+
+
+
+
+
 def remove_outliers(df, k, col_list):
     ''' remove outliers from a list of columns in a dataframe 
         and returns that dataframe

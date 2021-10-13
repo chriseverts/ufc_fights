@@ -9,14 +9,14 @@ import numpy as np
 from scipy import stats
 
 
-def get_ufc_data():
-    '''get connection, returns UFC into a dataframe and creates a csv for us'''
-    if os.path.isfile('ufc.csv'):
-        df = pd.read_csv('ufc.csv', index_col=0)
-    else:
-        df.to_csv('ufc.csv')
-    return df
 
+def new_ufc():
+    'this function will retrieve the original pokedex.csv file for use, and return as a dataframe'
+    df = pd.read_csv('data.csv', index_col=0)
+    return df 
+
+
+    
 
 def summarize_df(df):
     print('-----Head-------')
