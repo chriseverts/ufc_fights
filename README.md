@@ -115,11 +115,12 @@ I ran a few t-tests with the features in respect to winner to test for differenc
 ----The models worked best with average submission attempts, reach, average significant strikes, average ground attempts, and average control time(seconds).
 
                       
-|----------------------------------|---------------|---------------|-----------
-| Baseline                         | .65                            
-|----------------------------------|---------------|---------------------------
-| Model                            | Training      | Validate      | Accuracy
-|----------------------------------|---------------|---------------|-----------
+
+ Baseline  .65                                    
+
+
+| Model                            | Training      | Validate      | Accuracy  |
+|----------------------------------|---------------|---------------|-----------|
 | Decision Tree                    | 64.78%        | 64.99%        | 65%   
 | Logistic Regression              | 64.59%        | 64.99%        | 65%
 | KNN                              | 65.39%        | 64.34%        | 65%
@@ -130,11 +131,11 @@ Test Data Result
 
 | Model                            | Accuracy    
 |----------------------------------|---------------|
-| rfc	                                 63.35
-|	logistic_regression	                 63.35
-| svm	                                 63.35
-|	knn	                                 62.70
-|	naive_bayes	                         58.25
+| rfc	                             |    63.35
+|	logistic_regression	             |    63.35
+| svm	                             |    63.35
+|	knn	                             |    62.70
+|	naive_bayes	                     |    58.25
                           
 
 ## Delivery 
