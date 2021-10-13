@@ -57,26 +57,26 @@ Winner                      |the winner of the fight
 
 ##  Hypothesis 
 
-- Logerror is affected by squared feet over 1700 sq ft. 
+- More submission attempts and ctrl time will effect the outcome
+- The more rounds fought the more likely to win
+- Reach and hieght will effect the outcome of a win
+- Landing more sig shots will effect the outcome
 
-- Logerror is affected by the number of bedrooms
-
-- Logerror is affected by the number of acres
-
-- Logerror is affected by location
-
-- Logerror is affected by tax value per square feet
-
-- Logerror is effected by a combintaion of house features and also location + land
 
 ## Findings and Next Steps 
- - There appears to be distinct groups between longitude/latitude, and dollar per sqft/number of bedrooms, and acreage 
- - Using recursive feature elimination, it selected dollar per sqft, number of bathrooms, county, census block, and calculatedbathnbr .
+- There is a significance in the number of submission attempts in determining the outcome of a fight
+
+- There is no significance in the number of rounds fought with those 16 or  more rds fought
+
+- There is no significance between reach and the winner
+
+- There is significance between those with 50% or more significant strike percentage
+
 
 
 Next steps would be:
- - gather more information on location
- - Try out new combinations for clustering with these as well as other columns with other property features.
+ - gather more information on UFC fighers
+ - Try out more combinations and also add in blue fighter stats
 
 
 # The Pipeline
@@ -91,42 +91,52 @@ First, I will begin by bringing in my data and exploring features to assure that
 Goal: Have UFC dataframe ready to prepare in first part of wrangle.py In this stage, I used a csv file that was downloaded from the kaggle database. I turned it into a pandas dataframe and created a .csv in order to use it for the rest of the pipeline.
 
 ## Prep 
-Goal: Have UFC dataset that is split into train, validate, test, and ready to be analyzed. Assure data types are appropriate and that missing values/duplicates/outliers are addressed. Put this in our wrangle.py file as well. In this stage, I handled missing values by dropping any rows and columns with more than 50% missing data.
+Goal: Have UFC dataset that is split into train, validate, test, and ready to be analyzed. Assure data types are appropriate and that missing values/duplicates/outliers are addressed. Put this in our prep.py file as well. In this stage, I handled missing values by dropping any rows and columns with missing data and also used imputation
 
-Duplicates were dropped 
-
----Nulls in square footage, lotsize, tax value, and tax amount were imputed with median. (after splitting)
-
----Nulls in calculatedbathnbr, full bath count, region id city, regionidzip, and censustractandblock were imputed with most frequent. (after splitting)
-
-Any remaining nulls after these were dropped. I split the data into train, validate, test, X_train, y_train, X_validate, y_validate, X_test, and y_test. Last, I scaled it on a StandardScaler scaler (I made sure to drop outliers first!) and also returned X_train, X_validate, and X_test scaled.
+Any remaining nulls after these were dropped. I split the data into train, validate, test, X_train, y_train, X_validate, y_validate, X_test, and y_test. 
 
 ## Explore 
 Goal: Visualize the data. Explore relationships. Use the visuals and statistics tests to help answer my questions. I plotted distributions, made sure nothing was out of the ordinary after cleaning the dataset.
 
-I ran a few t-tests with the features in respect to winner to test for difference in means. Also did a few correlation tests for continuous variables.
+I ran a few t-tests with the features in respect to winner to test for difference in means. 
 
-----I found that square footage, bedroom count, and acres over 2 were all statistically significant. They are not independent to logerror. Square footage less then 1500 did not have an effect on logerror
+---- I found that There is evidence to suggest there is a difference in a winner with more then one submission attempt vs no submission attempts
+
+---- There is evidence to suggest there is a difference in a winner with more then 16 rounds fought vs less then 16 rounds fought
+
+---- There is evidence to suggest there is a difference in a winner with more then 16 rounds fought vs less then 16 rounds fought
+
+---- There is evidence to suggest there is a difference in a winner with a signifcant strike percentage over 50% vs less then 50%
+
 
 ## Modeling and Evaluation
-----Goal: develop a regression model that performs better than the baseline.
+----Goal: develop a classification model that performs better than the baseline.
 
-----The models worked best with $/sqft, acres, cluster, and locations. Polynomial Regression performed the best, so I did a test on it.
+----The models worked best with average submission attempts, reach, average significant strikes, average ground attempts, and average control time(seconds).
 
-| Model                            | RMSE Training | RMSE Validate | R^2   |
-|----------------------------------|---------------|---------------|-------|
-| Baseline                         | 0.1718        | 0.1605        | 0.000 |
-| OLS LinearRegression             | 0.1716        | 0.1602        | 0.003 |
-| LassoLars                        | 0.1718        | 0.1604        | 0.000 |
-| TweedieRegressor                 | 0.1717        | 0.1603        | 0.002 |
-| PolynomialRegression (2 degrees) | 0.1715        | 0.1602        | 0.003 |
+                      
+
+ Baseline  .65                                    
+
+
+| Model                            | Training      | Validate      | Accuracy  |
+|----------------------------------|---------------|---------------|-----------|
+| Decision Tree                    | 64.78%        | 64.99%        | 65%   
+| Logistic Regression              | 64.59%        | 64.99%        | 65%
+| KNN                              | 65.39%        | 64.34%        | 65%
+
 <br>
 
-Test for OLS Linear Regression:
- - RMSE of 0.174
- - R^2 of 0.003
+Test Data Result
 
-
+| Model                            | Accuracy    
+|----------------------------------|---------------|
+| rfc	                             |    63.35
+|	logistic_regression	             |    63.35
+| svm	                             |    63.35
+|	knn	                             |    62.70
+|	naive_bayes	                     |    58.25
+                          
 
 ## Delivery 
 A final notebook walkthrough of the my findings will be given 
@@ -136,12 +146,14 @@ A final notebook walkthrough of the my findings will be given
 
 # Conclusion 
 
+- Based on the features average submission attempts ,reach ,average significant strikes, 'average ground attempts ,average control time(seconds) there is a 63%     accuracy of predicting a winner. 
 
-----My clustering didn't help with my supervised model, however, I could not find the right combinations to make my model beat the baseline for predicting log error either.
+- My test accuracy of 63% did not beat my baseline of 65% 
 
- - Log error was different for properties depending on county, number of bedrooms, dollar per square foot, and acres.
- - I made clusters with tax value and square footage, longitude and latitude, and based on property features like age, dollar per sqft, and acreage. I also made one based on location (neighborhoods) which consisted of longitude, latitude, and acreage bins.
-  - My best model was my quadratic model (2 degrees), but even though it surpassed the baseline on train and validate, it did not perform better on the test. The RMSE to beat was 0.160, but mine was 0.174. It did better on r^2 at only 0.003 though. 
+- The chart above, I ran my test data on multiple machine learning algo's to get a visual
+
+- With more time I would like to try different combinations or maybe use all the features
+
 
 
 # How to Recreate Project
