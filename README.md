@@ -21,10 +21,11 @@ Finalized Jupyter notebook complete with comments
 
 A README.md with executive summary, contents, data dictionary, conclusion and next steps, and how to recreate this project.
 
-Here is a provided link to my [trello board]
 
 ## Project Summary
-I incorporated clustering to discover keys drivers in logerror of zestimates using a Zillow data frame.
+- Based on the features average submission attempts ,reach ,average significant strikes, 'average ground attempts ,average control time(seconds) there is a 64.5%   accuracy of predicting a winner. 
+
+- My test accuracy of 64.5% did not beat my baseline of 65% 
 
 ## Data Dictionary 
 
@@ -64,6 +65,7 @@ Winner                      |the winner of the fight
 
 
 ## Findings and Next Steps 
+
 - There is a significance in the number of submission attempts in determining the outcome of a fight
 
 - There is no significance in the number of rounds fought with those 16 or  more rds fought
@@ -76,8 +78,8 @@ Winner                      |the winner of the fight
 
 Next steps would be:
  - gather more information on UFC fighers
+ 
  - Try out more combinations and also add in blue fighter stats
-
 
 # The Pipeline
 
@@ -104,8 +106,6 @@ I ran a few t-tests with the features in respect to winner to test for differenc
 
 ---- There is evidence to suggest there is a difference in a winner with more then 16 rounds fought vs less then 16 rounds fought
 
----- There is evidence to suggest there is a difference in a winner with more then 16 rounds fought vs less then 16 rounds fought
-
 ---- There is evidence to suggest there is a difference in a winner with a signifcant strike percentage over 50% vs less then 50%
 
 
@@ -121,8 +121,9 @@ I ran a few t-tests with the features in respect to winner to test for differenc
 
 | Model                            | Training      | Validate      | Accuracy  |
 |----------------------------------|---------------|---------------|-----------|
-| Decision Tree                    | 64.78%        | 64.99%        | 65%   
+| Decision Tree                    | 64.83%        | 64.56%        | 65%   
 | Logistic Regression              | 64.59%        | 64.99%        | 65%
+| RFM                              | 64.55%        | 64.56%        | 65%
 | KNN                              | 65.39%        | 64.34%        | 65%
 
 <br>
@@ -131,11 +132,11 @@ Test Data Result
 
 | Model                            | Accuracy    
 |----------------------------------|---------------|
-| rfc	                             |    63.35
-|	logistic_regression	             |    63.35
-| svm	                             |    63.35
-|	knn	                             |    62.70
-|	naive_bayes	                     |    58.25
+| rfc	                             |    64.50
+|	logistic_regression	             |    64.50
+| svm	                             |    64.50
+|	knn	                             |    64.14
+|	naive_bayes	                     |    59.95
                           
 
 ## Delivery 
@@ -148,7 +149,7 @@ A final notebook walkthrough of the my findings will be given
 
 - Based on the features average submission attempts ,reach ,average significant strikes, 'average ground attempts ,average control time(seconds) there is a 63%     accuracy of predicting a winner. 
 
-- My test accuracy of 63% did not beat my baseline of 65% 
+- My test accuracy of 64.5% did not beat my baseline of 65% 
 
 - The chart above, I ran my test data on multiple machine learning algo's to get a visual
 
